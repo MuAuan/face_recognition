@@ -31,7 +31,6 @@ K.set_image_data_format('channels_last')
 
 #その１　------データセット作成------
 
-#フォルダは整数で名前が付いています。
 def getDataSet(img_rows,img_cols):
     #リストの作成
     X_train = []
@@ -40,40 +39,36 @@ def getDataSet(img_rows,img_cols):
     y_test = []
 
     for i in range(0,6):
-        path = "./train_images/"
+        path = "./train_images/" #train_images配下に0－5の整数フォルダに置きます
         if i == 0:
-            #othersは600枚用意します。テスト用には60枚
+            #70枚用意します。テスト用には10枚
             cutNum = 70
             cutNum2 = 60
         elif i == 1:
-            #乃木坂メンバーは700枚ずつ。テスト用には70枚
+            #70枚用意します。テスト用には10枚
             cutNum = 70
             cutNum2 = 60
         elif i==2:
-            #乃木坂メンバーは700枚ずつ。テスト用には70枚
+            #70枚用意します。テスト用には10枚
             cutNum = 70
             cutNum2 = 60
- 
         elif i==3:
-            #乃木坂メンバーは700枚ずつ。テスト用には70枚
+            #70枚用意します。テスト用には10枚
             cutNum = 70
             cutNum2 = 60
- 
         elif i==4:
-            #乃木坂メンバーは700枚ずつ。テスト用には70枚
+            #70枚用意します。テスト用には10枚
             cutNum = 70
             cutNum2 = 60
  
         else:
-            #主要キャラたちは480枚ずつ。テスト用には40枚
+            #70枚用意します。テスト用には10枚
             cutNum = 70
             cutNum2 = 60
         imgList = os.listdir(path+str(i))
         print(imgList)
         imgNum = len(imgList)
         for j in range(cutNum):
-            #imgSrc = cv2.imread(path+str(i)+"/"+imgList[j])
-            #target_size=(img_rows,img_cols)のサイズのimage
             img = image.load_img(path+str(i)+"/"+imgList[j], target_size=(img_rows,img_cols))
             imgSrc = image.img_to_array(img)
                         
