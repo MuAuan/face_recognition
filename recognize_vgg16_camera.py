@@ -17,7 +17,7 @@ def cv_fourcc(c1, c2, c3, c4):
             ((ord(c3) & 255) << 16) + ((ord(c4) & 255) << 24)
 
 def yomikomi(model,img):
-    name_list=['まゆゆ','さっしー','きたりえ','‎じゅりな','おぎゆか','あかりん']
+    name_list=['まゆゆ','さっしー','きたりえ','‎じゅりな','おぎゆか','あかりんだーすー']
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     preds = model.predict(x)
@@ -89,11 +89,12 @@ def main():
             #検出した顔を囲む矩形の作成
             for rect in facerect:
                 y,x=tuple(rect[0:2])
-                h,w=tuple(rect[2:4])
-                #print(y,x,h,w)
+                y2,x2=tuple(rect[0:2]+rect[2:4])
+                print(y,x,y2,x2)
                 cv2.rectangle(frame, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), color, thickness=2)
-                roi = frame[y:y+h, x:x+w]
+                roi = frame[y:y2, x:x2]  #frame[y:y+h, x:x+w]
                 try:
+                    #cv2.imshow('roi0',roi)
                     roi = cv2.resize(roi, (int(224), 224))
                     cv2.imshow('roi',roi)
                     txt=yomikomi(model,roi)
@@ -124,7 +125,7 @@ def main():
             is_video = "True"
         elif key == ord('s'):
             s=0.1
-            is_video = "False"    
+            is_video = "True"   #"False"    
         
 if __name__ == '__main__':
     main()  
